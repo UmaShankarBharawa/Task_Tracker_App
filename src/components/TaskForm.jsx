@@ -16,7 +16,8 @@ export default function TaskForm() {
         if (inputValue.trim().length > 0) {
             const newTask = {
                 id: Date.now(),
-                title: inputValue.trim()
+                title: inputValue.trim(),
+                isCompleted: false,
             }
             setTasks([...tasks, newTask]);
             setInputValue('');

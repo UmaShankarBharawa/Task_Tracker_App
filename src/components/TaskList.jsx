@@ -2,6 +2,15 @@ import TaskItem from "./TaskItem";
 
 export default function TaskList(props) {
 
+
+    const handleCheckboxChange = (idToToggle) => {
+        props.setTasks(prevTasks => 
+            prevTasks.map(task => {
+                return task.id === idToToggle ? { ...task, isCompleted: !task.isCompleted } : task
+            })
+        )
+    }
+
     const deleteTask = (idToDelete) => {
         const newTasks = props.tasks.filter(task => task.id !== idToDelete);
         props.setTasks(newTasks);
@@ -12,7 +21,7 @@ export default function TaskList(props) {
             <ul>
                 {props.tasks.map((task) => {
                     return (
-                        <TaskItem key={task.id} task={task} deleteTask={() => deleteTask(task.id)} />
+                        <TaskItem key={task.id} task={task} deleteTask={() => deleteTask(task.id)} onToggle={()=> handleCheckboxChange(task.id)} />
                     )
                 })}
             </ul>
